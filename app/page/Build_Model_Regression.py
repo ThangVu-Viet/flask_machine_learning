@@ -20,10 +20,7 @@ def preprocessing(x):
     polynomial_converter = PolynomialFeatures(degree=degree, include_bias=False)  # khởi tạo mô hình y = ax^2+bx+c
 
     # Transform input features into polynomial features
-    poly_features = polynomial_converter.fit_transform(x)  # đi tìm đường cong tốt nhất mà gần với bộ dữ liệu X nhất
-
-    # Split the data into training and testing sets
-
+    poly_features = polynomial_converter.fit_transform(x)
     return poly_features
 
 
@@ -79,7 +76,7 @@ def create_model_RNN(x, y):
     rnn_model.compile(optimizer='adam', loss='mse')
 
     # Fit model
-    rnn_model.fit(x_train, y_train, epochs=25, batch_size=1)
+    rnn_model.fit(x_train, y_train, epochs=51, batch_size=1)
 
     # Predict on test data
     y_pred_rnn = rnn_model.predict(x_test).flatten()
