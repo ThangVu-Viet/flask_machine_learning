@@ -1,0 +1,30 @@
+<!-- Tao form nhap dac trung dau vao cho bai toan neu muon-- !>
+<div class="container shadow p-3 mb-5 bg-body rounded">
+        <form action="{{ url_for('page.index') }}" method="post">
+            <div class="input-group mb-3 input-group-sm">
+                <span class="input-group-text">Feature 1</span>
+                <input type="text" class="form-control" placeholder="House age" aria-label="Server" name="f2"
+                       required="required">
+                <span class="input-group-text">Feature 2</span>
+                <input type="text" class="form-control" placeholder="Distance to the nearest MRT station"
+                       aria-label="Server" name="f3" required="required">
+            </div>
+            <div class="input-group mb-3 input-group-sm">
+                <span class="input-group-text">Feature 3</span>
+                <input type="text" class="form-control" placeholder="Number of convenience stores"
+                       aria-label="Username" name="f4" required="required">
+                <span class="input-group-text">Feature 4</span>
+                <input type="text" class="form-control" placeholder="Latitude" aria-label="Server" name="f5"
+                       required="required">
+                <span class="input-group-text">Feature 5</span>
+                <input type="text" class="form-control" placeholder="Longitude"
+                       aria-label="Server" name="f6" required="required">
+            </div>
+            {% if output %}
+                <h5>Prediction using the method Polynomial Regression: {{ output[0] }}</h5>
+                <h5>Prediction using the method Gradient Boosting: {{ output[1] }}</h5>
+                <h5>Prediction using the method Recurrent neural network: {{ output[2] }}</h5>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Prediction</button>
+        </form>
+    </div>

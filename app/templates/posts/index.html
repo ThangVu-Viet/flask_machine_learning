@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <span class="title"><h1>{% block title %}Posts{% endblock %}</h1></span>
+    <hr>
+    {% for p in posts %}
+        <h3>{{ p.title }}</h3>
+        <h6>{{ p.content }}</h6>
+        <hr>
+    {% endfor %}
+{% endblock %}

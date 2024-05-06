@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+    <br><br>
+    <div>
+    <span>Chúng tôi đi giải quyết bài toán dự báo giá nhà bằng 03 phương pháp:...
+        Dữ liệu chúng tôi lấy từ trang kaggle.com (https://www.kaggle.com/code/aminizahra/polynomial-regression).
+        Giao diện của chúng tôi chia là 03 phần:
+        Phần 01: Dùng để huấn luyện các mô hình theo các bước sau:
+        - step 01: load dữ liệu từ file .csv trong thư mục static.
+        - step 02: Huấn luyện các mô hình với dữ liệu trên tương ứng với các thuật toán trên.
+        - step 03: Sau khi huấn luyện chúng tôi lưu các mô hình vào 03 file tương ứng với 03 thuật toán: polymodel.pkl (polynomial regression),
+        gb_model.pkl (gradient Boosting), rnn_model.h5 (recurrent neural network).
+        Phần 02: ...
+    </span>
+    </div>
+    <div class="container shadow p-3 mb-5 bg-body rounded">
+        <form action="{{ url_for('page.training') }}" method="post">
+            <ol>
+                <li>Method Polynomial Regression</li>
+                {% if text_out %}
+                    <span style="color: blue">{{ text_out[0] }}</span><br>
+                    <span style="color: blue">Mean_absolute_error:{{ metrics[0][0] }}</span><br>
+                    <span style="color: blue">mean_squared_error:{{ metrics[0][1] }}</span>
+                {% endif %}
+                <li>Method Gradient Boosting</li>
+                {% if text_out %}
+                    <span style="color: blue">{{ text_out[1] }}</span><br>
+                    <span style="color: blue">Mean_absolute_error:{{ metrics[1][0] }}</span><br>
+                    <span style="color: blue">mean_squared_error:{{ metrics[1][1] }}</span>
+                {% endif %}
+                <li>Recurent Neural Network</li>
+                {% if text_out %}
+                    <span style="color: blue">{{ text_out[2] }}</span><br>
+                    <span style="color: blue">Mean_absolute_error:{{ metrics[2][0] }}</span><br>
+                    <span style="color: blue">mean_squared_error:{{ metrics[2][1] }}</span>
+                {% endif %}
+            </ol>
+            <button type="submit" class="btn btn-primary">Build model (Training)</button>
+        </form>
+    </div>
+    <div class="container shadow p-3 mb-5 bg-body rounded">
+        <span>Please if you want to test data, click the button bellow!</span>
+        <form action="{{ url_for('page.testing') }}" method="post">
+            {% if mss %}
+                <h5>{{ mss }}</h5>
+            {% endif %}
+            <button type="submit" class="btn btn-primary" name="testing">Testing the model</button>
+        </form>
+    </div>
+
+    <div class="container shadow p-3 mb-5 bg-body rounded">
+        <form action="{{ url_for('page.result') }}" method="post">
+            <button type="submit" class="btn btn-primary">Show the result of the prediction</button>
+            {% if results %}
+                <div class="overflow-auto">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Real price</th>
+                            <th scope="col">Price_regression</th>
+                            <th scope="col">Price_Gradient Boosting</th>
+                            <th scope="col">Price_RNN</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for r in results %}
+                            <tr>
+                                <td>{{ r.id }}</td>
+                                <td>{{ r.Real_result }}</td>
+                                <td>{{ r.PL_regression }}</td>
+                                <td>{{ r.Gradient_boosting }}</td>
+                                <td>{{ r.RNN }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+{% endblock %}

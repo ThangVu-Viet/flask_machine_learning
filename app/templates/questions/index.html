@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <span class="title"><h1>{% block title %}Question page{% endblock %}</h1></span>
+    <form action="#" method="post">
+        <div class="mb-3">
+            <label for="#" class="form-label">Questions</label>
+            <textarea class="form-control" id="textAreaExample1" rows="4" cols="10" name="content"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="#" class="form-label">Answer</label>
+            <textarea class="form-control" id="textAreaExample1" rows="4" cols="10" name="answer"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <hr>
+    {% for q in questions %}
+        <h4>{{ q.content}}</h4>
+        <h4>{{ q.answer }}</h4>
+        <hr>
+    {% endfor %}
+{% endblock %}

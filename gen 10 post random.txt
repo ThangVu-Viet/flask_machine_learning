@@ -1,0 +1,11 @@
+from random
+
+for i in range(0,10):
+    random_num = random.randrange(0,1000)
+    post = Post(title = f'Post #{random_num}',
+                content = f'Content of post #{random_num}')
+    db.session.add(post)
+    print(post)
+    print(post.content)
+    print('--')
+    db.session.commit()
